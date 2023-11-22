@@ -44,6 +44,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""13944444-9ff5-4099-b9e5-29cbcf688338"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TripleFire"",
+                    ""type"": ""Button"",
+                    ""id"": ""feeb2080-6fa3-4db1-8730-78d045bb854d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -114,39 +132,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""ArrowKeys"",
-                    ""id"": ""5651dbf4-061c-43f4-95e4-e71e2bbf5508"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Turn"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""3a04ab82-8113-4122-afa3-f0fa3ddeab0c"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Turn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""1f3a6679-f9dd-4d54-b663-e9f29a1a43e9"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Turn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""Joystick"",
                     ""id"": ""949bc0f7-e028-4146-96b5-3d587b1fed69"",
                     ""path"": ""1DAxis"",
@@ -178,6 +163,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b314ef52-a32e-481b-99a1-d6459ba50575"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36e34ec7-accf-4f42-b984-3c24ad7fb9d3"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""637718b4-9f62-418b-a125-194376d1a10f"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TripleFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1604a71e-7c00-4eb3-8539-d00eb2d1b6a6"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TripleFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -188,6 +217,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Accelerate = m_Player.FindAction("Accelerate", throwIfNotFound: true);
         m_Player_Turn = m_Player.FindAction("Turn", throwIfNotFound: true);
+        m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_TripleFire = m_Player.FindAction("TripleFire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -251,12 +282,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Accelerate;
     private readonly InputAction m_Player_Turn;
+    private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_TripleFire;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Accelerate => m_Wrapper.m_Player_Accelerate;
         public InputAction @Turn => m_Wrapper.m_Player_Turn;
+        public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @TripleFire => m_Wrapper.m_Player_TripleFire;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -272,6 +307,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Turn.started += instance.OnTurn;
             @Turn.performed += instance.OnTurn;
             @Turn.canceled += instance.OnTurn;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
+            @TripleFire.started += instance.OnTripleFire;
+            @TripleFire.performed += instance.OnTripleFire;
+            @TripleFire.canceled += instance.OnTripleFire;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -282,6 +323,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Turn.started -= instance.OnTurn;
             @Turn.performed -= instance.OnTurn;
             @Turn.canceled -= instance.OnTurn;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
+            @TripleFire.started -= instance.OnTripleFire;
+            @TripleFire.performed -= instance.OnTripleFire;
+            @TripleFire.canceled -= instance.OnTripleFire;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -303,5 +350,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnAccelerate(InputAction.CallbackContext context);
         void OnTurn(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
+        void OnTripleFire(InputAction.CallbackContext context);
     }
 }

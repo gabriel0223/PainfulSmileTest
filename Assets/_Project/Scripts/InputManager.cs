@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    public event Action OnFire;
+    public event Action OnTripleFire;
+
     private PlayerControls _playerControls;
 
     public float AccelerationInput { get; private set; }
@@ -19,6 +22,9 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         _playerControls.Enable();
+
+        _playerControls.Player.Fire.performed += ctx => OnFire?.Invoke();
+        _playerControls.Player.TripleFire.performed += ctx => OnTripleFire?.Invoke();
     }
 
     private void OnDisable()

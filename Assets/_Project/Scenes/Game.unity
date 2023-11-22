@@ -1860,6 +1860,37 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &940252109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 940252110}
+  m_Layer: 0
+  m_Name: FrontalShotPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &940252110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940252109}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.974, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1778850903}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &955615204
 GameObject:
   m_ObjectHideFlags: 0
@@ -64046,6 +64077,7 @@ GameObject:
   - component: {fileID: 1778850907}
   - component: {fileID: 1778850905}
   - component: {fileID: 1778850906}
+  - component: {fileID: 1778850908}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Untagged
@@ -64068,6 +64100,7 @@ Transform:
   m_Children:
   - {fileID: 1367758017}
   - {fileID: 1247630808}
+  - {fileID: 940252110}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1778850904
@@ -64170,6 +64203,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.579886, y: 1.4143589}
   m_EdgeRadius: 0
+--- !u!114 &1778850908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778850902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eb8052fab42b724f8d9f2a91b31123e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeBetweenShots: 0.5
+  _projectilePrefab: {fileID: 9016752240141568633, guid: 153d515b07cfeab4ca66f526fe8c3677, type: 3}
+  _frontalShotFirePoint: {fileID: 940252110}
+  _inputManager: {fileID: 1778850905}
 --- !u!1 &1870223123
 GameObject:
   m_ObjectHideFlags: 0
