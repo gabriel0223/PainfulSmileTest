@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
     private PlayerControls _playerControls;
 
     public float AccelerationInput { get; private set; }
+    public float TurnInput { get; private set; }
 
     private void Awake()
     {
@@ -28,5 +29,6 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         AccelerationInput = _playerControls.Player.Accelerate.ReadValue<float>();
+        TurnInput = _playerControls.Player.Turn.ReadValue<float>();
     }
 }
