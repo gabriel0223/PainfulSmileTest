@@ -21,12 +21,14 @@ public class ShipHealthBarView : MonoBehaviour
 
     private void OnEnable()
     {
-        _shipHealth.OnHealthUpdated += UpdateHealthBar;
+        _shipHealth.OnTakeDamage += UpdateHealthBar;
+        _shipHealth.OnDie += HideHealthBar;
     }
 
     private void OnDisable()
     {
-        _shipHealth.OnHealthUpdated -= UpdateHealthBar;
+        _shipHealth.OnTakeDamage -= UpdateHealthBar;
+        _shipHealth.OnDie -= HideHealthBar;
     }
 
     private void Start()
@@ -36,10 +38,17 @@ public class ShipHealthBarView : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        float healthPercentage = (float)_shipHealth.CurrentHealth / _shipHealth.MaxHealth;
-
         _healthText.SetText($"{_shipHealth.CurrentHealth}/{_shipHealth.MaxHealth}");
         _healthBar.DOSizeDelta(
-            new Vector2(_initialHealthBarWidth * healthPercentage, _healthBar.sizeDelta.y), 0.25f);
+            new Vector2(_initialHealthBarWidth * _shipHealth.HealthPercentage, _healthBar.sizeDelta.y), 0.25f);
+    }
+
+    private void HideHealthBar()
+    {
+        Sequence hideSequence = DOTween.Sequence();
+
+        hideSequence.AppendInterval(0.5f);
+        hideSequence.Append(transform.DOScale(Vector2.zero, 0.25f));
+        hideSequence.AppendCallback(() => Destroy(gameObject));
     }
 }

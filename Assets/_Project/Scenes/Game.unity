@@ -63804,6 +63804,51 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &966264295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 966264297}
+  - component: {fileID: 966264296}
+  m_Layer: 0
+  m_Name: ProjectilePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &966264296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966264295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb71308b0a4c7a4d94094995e926a1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectilePrefab: {fileID: 9016752240141568633, guid: 153d515b07cfeab4ca66f526fe8c3677, type: 3}
+--- !u!4 &966264297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966264295}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1498986710
 GameObject:
   m_ObjectHideFlags: 0
@@ -67167,33 +67212,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 208530527246672530, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.46
+    - target: {fileID: 3103205018729886887, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
+      propertyPath: _timeBetweenShots
+      value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 743641726032153989, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243820603831718573, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 3467188466703524804, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 3802453825056989097, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.46
+    - target: {fileID: 4388908143538717857, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5760646967521312309, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
       propertyPath: m_Name
       value: PlayerShip
-      objectReference: {fileID: 0}
-    - target: {fileID: 6609179020975188791, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.46
       objectReference: {fileID: 0}
     - target: {fileID: 9187926840931555569, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -67235,6 +67264,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9187926840931555569, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -67251,3 +67284,4 @@ SceneRoots:
   - {fileID: 6074876105260354526}
   - {fileID: 9136060174698879001}
   - {fileID: 1498986713}
+  - {fileID: 966264297}

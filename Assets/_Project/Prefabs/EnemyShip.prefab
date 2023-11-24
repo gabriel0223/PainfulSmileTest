@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3938590583244466857, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
+      propertyPath: _whiteOverlay
+      value: 
+      objectReference: {fileID: 6024235211958499168}
     - target: {fileID: 4858434642272318778, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -38,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5760646967521312309, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
       propertyPath: m_Name
-      value: EnemyShip Variant
+      value: EnemyShip
       objectReference: {fileID: 0}
     - target: {fileID: 8490994213623923863, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
       propertyPath: m_Color.b
@@ -97,3 +101,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
+--- !u!1 &6024235211958499168 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2542601995732816246, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
+  m_PrefabInstance: {fileID: 8129913267112191510}
+  m_PrefabAsset: {fileID: 0}

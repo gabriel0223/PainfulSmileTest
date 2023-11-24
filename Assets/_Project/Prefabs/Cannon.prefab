@@ -4935,6 +4935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cannonParticles: {fileID: 5145595178846920571}
+  _damage: 20
 --- !u!1 &8717352472232480832
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,14 +6,15 @@ using UnityEngine.Serialization;
 
 public class ShipHealth : MonoBehaviour, IDamageable
 {
-    public event Action OnHealthUpdated; 
+    public event Action OnTakeDamage;
+    public event Action OnDie;
 
     [SerializeField] private int _maxHealth;
 
-    private bool _isDead;
-
     public int MaxHealth => _maxHealth;
     public int CurrentHealth { get; private set; }
+    public float HealthPercentage => (float)CurrentHealth / MaxHealth;
+    public bool IsDead { get; private set; }
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class ShipHealth : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        if (_isDead)
+        if (IsDead)
         {
             return;
         }
@@ -34,11 +35,13 @@ public class ShipHealth : MonoBehaviour, IDamageable
             Die();
         }
 
-        OnHealthUpdated?.Invoke();
+        OnTakeDamage?.Invoke();
     }
 
     private void Die()
     {
-        _isDead = true;
+        IsDead = true;
+
+        OnDie?.Invoke();
     }
 }

@@ -11,12 +11,11 @@ public class ShipShooting : MonoBehaviour
     public event Action OnPlayerTripleFire;
 
     [SerializeField] private float _timeBetweenShots;
-    [SerializeField] private CannonProjectile _projectilePrefab;
     [SerializeField] private CannonController _frontalCannon;
     [SerializeField] private CannonController[] _sideCannons;
     [SerializeField] private InputManager _inputManager;
 
-    private ObjectPool<CannonProjectile> _projectilePool;
+    private ProjectilePool _projectilePool;
     private bool _canFrontFire = true;
     private bool _canTripleFire = true;
 
@@ -34,17 +33,7 @@ public class ShipShooting : MonoBehaviour
 
     private void Start()
     {
-        _projectilePool = new ObjectPool<CannonProjectile>(() => Instantiate(_projectilePrefab), 
-            projectile =>
-        {
-            projectile.gameObject.SetActive(true);
-        }, projectile =>
-        {
-            projectile.gameObject.SetActive(false);
-        }, projectile =>
-        {
-            Destroy(projectile.gameObject);
-        }, false, 20, 50);
+        _projectilePool = FindObjectOfType<ProjectilePool>();
     }
 
     private void HandleShipFire()
@@ -54,8 +43,8 @@ public class ShipShooting : MonoBehaviour
             return;
         }
 
-        CannonProjectile projectile = _projectilePool.Get();
-        _frontalCannon.Fire(projectile);
+        CannonProjectile projectile = _projectilePool.GetProjectile();
+        _frontalCannon.Fire(projectile, _projectilePool);
 
         OnPlayerFire?.Invoke();
 
@@ -80,8 +69,8 @@ public class ShipShooting : MonoBehaviour
 
         foreach (CannonController cannon in _sideCannons)
         {
-            CannonProjectile projectile = _projectilePool.Get();
-            cannon.Fire(projectile);
+            CannonProjectile projectile = _projectilePool.GetProjectile();
+            cannon.Fire(projectile, _projectilePool);
         }
 
         OnPlayerTripleFire?.Invoke();
