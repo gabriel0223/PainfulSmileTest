@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 730117935864200731}
   - component: {fileID: 2340514877180804260}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: 8237226099619024098}
   - component: {fileID: 4207025431331527453}
   - component: {fileID: 9016752240141568633}
-  m_Layer: 0
-  m_Name: CanonProjectile
+  m_Layer: 6
+  m_Name: CannonProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,7 +176,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -205,7 +205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5176848028543228504}
   - component: {fileID: 8974434497939793485}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

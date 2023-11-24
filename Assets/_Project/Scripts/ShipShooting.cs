@@ -7,27 +7,34 @@ using UnityEngine.Serialization;
 
 public class ShipShooting : MonoBehaviour
 {
+    public event Action OnPlayerFire;
+    public event Action OnPlayerTripleFire;
+
     [SerializeField] private float _timeBetweenShots;
-    [SerializeField] private CanonProjectile _projectilePrefab;
-    [SerializeField] private Transform _frontalShotFirePoint;
+    [SerializeField] private CannonProjectile _projectilePrefab;
+    [SerializeField] private CannonController _frontalCannon;
+    [SerializeField] private CannonController[] _sideCannons;
     [SerializeField] private InputManager _inputManager;
 
-    private ObjectPool<CanonProjectile> _projectilePool;
-    private bool _canFire = true;
+    private ObjectPool<CannonProjectile> _projectilePool;
+    private bool _canFrontFire = true;
+    private bool _canTripleFire = true;
 
     private void OnEnable()
     {
         _inputManager.OnFire += HandleShipFire;
+        _inputManager.OnTripleFire += HandleTripleFire;
     }
 
     private void OnDisable()
     {
         _inputManager.OnFire -= HandleShipFire;
+        _inputManager.OnTripleFire -= HandleTripleFire;
     }
 
     private void Start()
     {
-        _projectilePool = new ObjectPool<CanonProjectile>(() => Instantiate(_projectilePrefab), 
+        _projectilePool = new ObjectPool<CannonProjectile>(() => Instantiate(_projectilePrefab), 
             projectile =>
         {
             projectile.gameObject.SetActive(true);
@@ -42,25 +49,52 @@ public class ShipShooting : MonoBehaviour
 
     private void HandleShipFire()
     {
-        if (!_canFire)
+        if (!_canFrontFire)
         {
             return;
         }
 
-        CanonProjectile projectile = _projectilePool.Get();
-        projectile.transform.position = _frontalShotFirePoint.position;
-        projectile.transform.rotation = _frontalShotFirePoint.rotation;
-        projectile.Fire();
+        CannonProjectile projectile = _projectilePool.Get();
+        _frontalCannon.Fire(projectile);
+
+        OnPlayerFire?.Invoke();
 
         StartCoroutine(FireCooldownCoroutine());
     }
 
     IEnumerator FireCooldownCoroutine()
     {
-        _canFire = false;
+        _canFrontFire = false;
 
         yield return new WaitForSeconds(_timeBetweenShots);
 
-        _canFire = true;
+        _canFrontFire = true;
+    }
+
+    private void HandleTripleFire()
+    {
+        if (!_canTripleFire)
+        {
+            return;
+        }
+
+        foreach (CannonController cannon in _sideCannons)
+        {
+            CannonProjectile projectile = _projectilePool.Get();
+            cannon.Fire(projectile);
+        }
+
+        OnPlayerTripleFire?.Invoke();
+
+        StartCoroutine(TripleFireCooldownCoroutine());
+    }
+
+    IEnumerator TripleFireCooldownCoroutine()
+    {
+        _canTripleFire = false;
+
+        yield return new WaitForSeconds(_timeBetweenShots);
+
+        _canTripleFire = true;
     }
 }
