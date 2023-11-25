@@ -7,38 +7,26 @@ using UnityEngine.Serialization;
 
 public class ShipShooting : MonoBehaviour
 {
-    public event Action OnPlayerFire;
-    public event Action OnPlayerTripleFire;
-
     [SerializeField] private float _timeBetweenShots;
     [SerializeField] private CannonController _frontalCannon;
     [SerializeField] private CannonController[] _sideCannons;
-    [SerializeField] private InputManager _inputManager;
 
     private ProjectilePool _projectilePool;
-    private bool _canFrontFire = true;
-    private bool _canTripleFire = true;
 
-    private void OnEnable()
-    {
-        _inputManager.OnFire += HandleShipFire;
-        _inputManager.OnTripleFire += HandleTripleFire;
-    }
-
-    private void OnDisable()
-    {
-        _inputManager.OnFire -= HandleShipFire;
-        _inputManager.OnTripleFire -= HandleTripleFire;
-    }
+    public bool CanFrontFire { get; private set; }
+    public bool CanTripleFire { get; private set; }
 
     private void Start()
     {
+        CanFrontFire = true;
+        CanTripleFire = true;
+
         _projectilePool = FindObjectOfType<ProjectilePool>();
     }
 
-    private void HandleShipFire()
+    public void FireFrontCannon()
     {
-        if (!_canFrontFire)
+        if (!CanFrontFire)
         {
             return;
         }
@@ -46,23 +34,21 @@ public class ShipShooting : MonoBehaviour
         CannonProjectile projectile = _projectilePool.GetProjectile();
         _frontalCannon.Fire(projectile, _projectilePool);
 
-        OnPlayerFire?.Invoke();
-
-        StartCoroutine(FireCooldownCoroutine());
+        StartCoroutine(FrontCannonCooldownCoroutine());
     }
 
-    IEnumerator FireCooldownCoroutine()
+    IEnumerator FrontCannonCooldownCoroutine()
     {
-        _canFrontFire = false;
+        CanFrontFire = false;
 
         yield return new WaitForSeconds(_timeBetweenShots);
 
-        _canFrontFire = true;
+        CanFrontFire = true;
     }
 
-    private void HandleTripleFire()
+    public void FireTripleCannons()
     {
-        if (!_canTripleFire)
+        if (!CanTripleFire)
         {
             return;
         }
@@ -73,17 +59,15 @@ public class ShipShooting : MonoBehaviour
             cannon.Fire(projectile, _projectilePool);
         }
 
-        OnPlayerTripleFire?.Invoke();
-
-        StartCoroutine(TripleFireCooldownCoroutine());
+        StartCoroutine(TripleCannonsCooldownCoroutine());
     }
 
-    IEnumerator TripleFireCooldownCoroutine()
+    IEnumerator TripleCannonsCooldownCoroutine()
     {
-        _canTripleFire = false;
+        CanTripleFire = false;
 
         yield return new WaitForSeconds(_timeBetweenShots);
 
-        _canTripleFire = true;
+        CanTripleFire = true;
     }
 }

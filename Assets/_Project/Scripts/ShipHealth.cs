@@ -40,6 +40,7 @@ public class ShipHealth : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        CurrentHealth = 0;
         IsDead = true;
 
         OnDie?.Invoke();

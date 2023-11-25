@@ -9,8 +9,7 @@ public class ProjectilePool : MonoBehaviour
 
     private ObjectPool<CannonProjectile> _projectilePool;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _projectilePool = new ObjectPool<CannonProjectile>(() => Instantiate(_projectilePrefab), 
             projectile =>

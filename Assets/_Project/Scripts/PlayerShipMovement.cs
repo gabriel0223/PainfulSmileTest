@@ -3,13 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipMovement : MonoBehaviour
+[RequireComponent(typeof(InputManager), typeof(Rigidbody2D))]
+public class PlayerShipMovement : ShipMovementBase
 {
-    [SerializeField] private InputManager _inputManager;
-    [SerializeField] private Rigidbody2D _rb2d;
-    [Header("Settings")] 
     [SerializeField] private float _shipSpeed;
     [SerializeField] private float _turnSpeed;
+
+    private InputManager _inputManager;
+    private Rigidbody2D _rb2d;
+
+    private void Awake()
+    {
+        _inputManager = GetComponent<InputManager>();
+        _rb2d = GetComponent<Rigidbody2D>();
+    }
 
     private void FixedUpdate()
     {
@@ -22,5 +29,10 @@ public class ShipMovement : MonoBehaviour
         {
             _rb2d.AddTorque(-_turnSpeed * _inputManager.TurnInput, ForceMode2D.Force);
         }
+    }
+
+    public override Vector2 CurrentVelocity()
+    {
+        return _rb2d.velocity;
     }
 }

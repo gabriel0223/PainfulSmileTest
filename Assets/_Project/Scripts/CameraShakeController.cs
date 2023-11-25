@@ -7,7 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(CinemachineImpulseSource))]
 public class CameraShakeController : MonoBehaviour
 {
-    [SerializeField] private ShipShooting _playerShooting;
+    [SerializeField] private PlayerShooting _playerShooting;
+    [SerializeField] private ShipHealth _playerHealth;
     [SerializeField] private float _playerFireShakeForce;
     [SerializeField] private float _playerTripleFireShakeForce;
     [SerializeField] private float _playerDamageShakeForce;
@@ -24,6 +25,7 @@ public class CameraShakeController : MonoBehaviour
     {
         _playerShooting.OnPlayerFire += HandlePlayerFire;
         _playerShooting.OnPlayerTripleFire += HandlePlayerTripleFire;
+        _playerHealth.OnTakeDamage += HandlePlayerTakeDamage;
 
     }
 
@@ -31,6 +33,7 @@ public class CameraShakeController : MonoBehaviour
     {
         _playerShooting.OnPlayerFire -= HandlePlayerFire;
         _playerShooting.OnPlayerTripleFire -= HandlePlayerTripleFire;
+        _playerHealth.OnTakeDamage -= HandlePlayerTakeDamage;
     }
 
     private void HandlePlayerFire()
@@ -41,6 +44,11 @@ public class CameraShakeController : MonoBehaviour
     private void HandlePlayerTripleFire()
     {
         ExecuteCameraShake(_playerTripleFireShakeForce);
+    }
+
+    private void HandlePlayerTakeDamage()
+    {
+        ExecuteCameraShake(_playerDamageShakeForce);
     }
 
     private void ExecuteCameraShake(float force)
