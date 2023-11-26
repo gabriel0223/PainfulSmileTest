@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4549388718703433763, guid: 701173427237ef441bc988598e268034, type: 3}
       propertyPath: m_Name
-      value: ChaserEnemy Variant
+      value: ChaserEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 5078915024656338111, guid: 701173427237ef441bc988598e268034, type: 3}
       propertyPath: _whiteOverlay
@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: _shipDamageSprites.Array.data[2]
       value: 
       objectReference: {fileID: 21300000, guid: 58bdcc28722d37d459b5064331d18688, type: 3}
+    - target: {fileID: 7027246649730272155, guid: 701173427237ef441bc988598e268034, type: 3}
+      propertyPath: _maxHealth
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 9206617840833264125, guid: 701173427237ef441bc988598e268034, type: 3}
       propertyPath: m_Sprite
       value: 

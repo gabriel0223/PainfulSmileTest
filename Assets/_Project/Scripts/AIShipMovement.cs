@@ -24,6 +24,16 @@ public class AIShipMovement : ShipMovementBase
         _agent.updateRotation = false;
     }
 
+    private void OnEnable()
+    {
+        _shipHealth.OnDie += HandleShipDie;
+    }
+
+    private void OnDisable()
+    {
+        _shipHealth.OnDie -= HandleShipDie;
+    }
+
     private void Start()
     {
         _player = FindObjectOfType<InputManager>().transform;
@@ -48,5 +58,10 @@ public class AIShipMovement : ShipMovementBase
     public override Vector2 CurrentVelocity()
     {
         return _agent.velocity;
+    }
+
+    private void HandleShipDie()
+    {
+        _agent.enabled = false;
     }
 }

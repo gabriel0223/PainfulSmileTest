@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340f7427f74fc884ba2388986d6bcf5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shipHealth: {fileID: 1249338307499732365}
   _shipMovement: {fileID: 1176089913400337325}
   _damageOverImpactForce:
     serializedVersion: 2

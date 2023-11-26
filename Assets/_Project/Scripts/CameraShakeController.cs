@@ -12,7 +12,6 @@ public class CameraShakeController : MonoBehaviour
     [SerializeField] private float _playerFireShakeForce;
     [SerializeField] private float _playerTripleFireShakeForce;
     [SerializeField] private float _playerDamageShakeForce;
-    [SerializeField] private float _enemyDeathShakeForce;
 
     private CinemachineImpulseSource _cinemachineImpulseSource;
 
