@@ -679,10 +679,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shipDamageSprites:
-  - {fileID: 21300000, guid: dfbdacd5370989f41a73594f6d36dce1, type: 3}
-  - {fileID: 21300000, guid: baa192c0753ec064b9c5e253e609b955, type: 3}
-  - {fileID: 21300000, guid: 58bdcc28722d37d459b5064331d18688, type: 3}
-  _shipDestroyedSprite: {fileID: 21300000, guid: d346955159a4e2946a1d7aeb64b6ddd1, type: 3}
+  - {fileID: 21300000, guid: d6df65f6396605440ad2faae43d35c0e, type: 3}
+  - {fileID: 21300000, guid: 3443ba51b8826de43bf957a155f900d9, type: 3}
+  - {fileID: 21300000, guid: 22483d6f99fd9414a934f8632eb94f75, type: 3}
+  _shipDestroyedSprite: {fileID: 21300000, guid: b1d95fd2df5f857498ed7eac0aa812c4, type: 3}
   _spriteRenderer: {fileID: 1087402908440780779}
   _shipHitEffect: {fileID: 1407453064732922844}
   _whiteOverlay: {fileID: 2542601995732816246}

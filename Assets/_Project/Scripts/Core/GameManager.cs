@@ -2,24 +2,39 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
     public event Action<int> OnScoreUpdate;
+    public event Action OnGameOver;
 
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private GameObject[] _enemyPrefabs;
+    [SerializeField] private ShipHealth _playerHealth;
 
     private bool _isGameOver;
-    private int _score;
+    private float _timeBetweenEnemySpawns;
 
-    public float Timer { get; private set; }
+    public float Timer { get; private set; } 
+    public int Score { get; private set; }
 
     private void Awake()
     {
-        Timer = 180;
+        Timer = GameSettings.GameSessionTime * 60;
+        _timeBetweenEnemySpawns = GameSettings.EnemySpawnTime;
+    }
+
+    private void OnEnable()
+    {
+        _playerHealth.OnDie += EndGame;
+    }
+
+    private void OnDisable()
+    {
+        _playerHealth.OnDie -= EndGame;
     }
 
     private void Start()
@@ -42,13 +57,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void GoBackToMainMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
     private IEnumerator SpawnEnemiesCoroutine()
     {
         while (!_isGameOver)
         {
             SpawnEnemy();
 
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(_timeBetweenEnemySpawns);
         }
     }
 
@@ -64,14 +89,21 @@ public class GameManager : MonoBehaviour
 
     private void IncreasePlayerScore()
     {
-        _score++;
+        if (_isGameOver)
+        {
+            return;
+        }
+
+        Score++;
         
-        OnScoreUpdate?.Invoke(_score);
+        OnScoreUpdate?.Invoke(Score);
     }
 
     private void EndGame()
     {
         _isGameOver = true;
-        Time.timeScale = 0;
+        _playerHealth.GetComponent<InputManager>().DisableInput();
+
+        OnGameOver?.Invoke();
     }
 }
