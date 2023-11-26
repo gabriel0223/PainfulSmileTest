@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(ShipShooting))]
+[RequireComponent(typeof(ShipShooting), typeof(ShipHealth))]
 public class AIShipShooting : MonoBehaviour
 {
     [SerializeField] private float _maxDistanceToAttack;
@@ -21,10 +21,9 @@ public class AIShipShooting : MonoBehaviour
         _shipHealth = GetComponent<ShipHealth>();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        _player = FindObjectOfType<InputManager>().transform;
+        _player = FindObjectOfType<PlayerTag>().transform;
 
         StartCoroutine(AIAttackLoop());
     }

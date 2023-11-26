@@ -36,16 +36,11 @@ public class AIShipMovement : ShipMovementBase
 
     private void Start()
     {
-        _player = FindObjectOfType<InputManager>().transform;
+        _player = FindObjectOfType<PlayerTag>().transform;
     }
 
     private void Update()
     {
-        if (_shipHealth.IsDead)
-        {
-            return;
-        }
-
         if (Vector3.Distance(transform.position, _player.position) > _minDistanceToChasePlayer)
         {
             _agent.SetDestination(_player.position);
@@ -62,6 +57,6 @@ public class AIShipMovement : ShipMovementBase
 
     private void HandleShipDie()
     {
-        _agent.enabled = false;
+        enabled = false;
     }
 }

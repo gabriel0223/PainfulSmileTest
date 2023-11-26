@@ -26,7 +26,7 @@ public class MainMenuController : MonoBehaviour
 
     private void StartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene((int)SceneIndex.Game);
     }
 
     private void OpenOptionsMenu()

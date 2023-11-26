@@ -59,12 +59,12 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene((int)SceneIndex.Game);
     }
 
     public void GoBackToMainMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene((int)SceneIndex.MainMenu);
     }
 
     private IEnumerator SpawnEnemiesCoroutine()

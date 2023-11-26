@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 880009485651441440}
     - target: {fileID: 5760646967521312309, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
       propertyPath: m_Name
-      value: EnemyShip
+      value: ShooterEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 8490994213623923863, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
       propertyPath: m_Color.b
@@ -129,6 +129,7 @@ PrefabInstance:
     - {fileID: 9771123377390025, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
     - {fileID: 2724898520478050938, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
     - {fileID: 1176089913400337325, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
+    - {fileID: 8873394463701960054, guid: 48ce39875bd82a54ea168f4b40b4afa2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
